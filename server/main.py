@@ -24,25 +24,25 @@ def home():
     return send_file(entry)
 
 
-@app.route('/challenges')
+@app.route('/api/challenges')
 def get_challenges():
     challenges = dbHandler.getChallenges()
     return jsonify(challenges)
 
 
-@app.route('/challenges/<challenge_id>/rank')
-def get_challenge(challenge_id):
-    challenge = dbHandler.getChallengeRank(challenge_id)
-    return jsonify(challenge)
-
-
-@app.route('/challenges/<challenge_id>')
+@app.route('/api/challenges/<challenge_id>')
 def get_challenge_rank(challenge_id):
     challenge = dbHandler.getChallenge(challenge_id)
     return jsonify(challenge)
 
 
-@app.route('/challenges/<challenge_id>', methods=['POST'])
+@app.route('/api/challenges/<challenge_id>/rank')
+def get_challenge(challenge_id):
+    challenge = dbHandler.getChallengeRank(challenge_id)
+    return jsonify(challenge)
+
+
+@app.route('/api/challenges/<challenge_id>', methods=['POST'])
 def check_challenge(challenge_id):
     response = {}
     values = request.get_json()
@@ -55,7 +55,7 @@ def check_challenge(challenge_id):
     return jsonify(response)
 
 
-@app.route('/rank')
+@app.route('/api/rank')
 def get_rank():
     users = dbHandler.getRank()
     return jsonify(users)

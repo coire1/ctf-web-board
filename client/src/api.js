@@ -18,18 +18,18 @@ export default {
     });
   },
   getChallenges() {
-    return this.execute("get", "/challenges");
+    return this.execute("get", "/api/challenges");
   },
   getChallenge(id) {
-    return this.execute("get", `/challenges/${id}`);
+    return this.execute("get", `/api/challenges/${id}`);
   },
   getChallengeRank(id) {
-    return this.execute("get", `/challenges/${id}/rank`);
+    return this.execute("get", `/api/challenges/${id}/rank`);
   },
   checkChallenge(id, data) {
-    return this.execute("post", `/challenges/${id}`, data);
+    return this.execute("post", `/api/challenges/${id}`, data);
   },
   getRank() {
-    return this.execute("get", "/rank");
+    return this.execute("get", "/api/rank");
   }
 };
