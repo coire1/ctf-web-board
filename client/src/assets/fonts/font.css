@@ -1,0 +1,18 @@
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: normal;
+	font-weight: normal;
+	src:
+		local('Press Start 2P Regular'),
+		local('PressStart2P-Regular'),
+		/* from https://fonts.gstatic.com/s/pressstart2p/v6/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2 */
+		url('Press_Start_2P.woff2') format('woff2'),
+		/* from https://fonts.gstatic.com/s/pressstart2p/v6/e3t4euO8T-267oIAQAu6jDQyK3nVivU.woff */
+		url('Press_Start_2P.woff') format('woff'),
+		/* from https://fonts.gstatic.com/s/pressstart2p/v6/e3t4euO8T-267oIAQAu6jDQyK3nVivc.eot */
+		url('Press_Start_2P.eot?#iefix') format('embedded-opentype'),
+		/* from https://fonts.gstatic.com/l/font?kit=e3t4euO8T-267oIAQAu6jDQyK3nVivQ&skey=24cc298767068e24&v=v6#PressStart2P */
+		url('Press_Start_2P.svg#PressStart2P') format('svg'),
+		/* from https://fonts.gstatic.com/s/pressstart2p/v6/e3t4euO8T-267oIAQAu6jDQyK3nVivY.ttf */
+		url('Press_Start_2P.ttf') format('truetype');
+}
