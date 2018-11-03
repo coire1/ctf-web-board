@@ -1,5 +1,5 @@
 # CTF web board
-This is a sample skeleton to make a board for CTFs.
+A simple skeleton to make a score board for CTFs.
 The board uses [`Flask`](http://flask.pocoo.org/) to provide a simple HTTP API
 and [`Vue.js`](https://vuejs.org/) for the web app client and
 [`Sqlite`](https://www.sqlite.org/index.html) as database.
