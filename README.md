@@ -11,7 +11,7 @@ A simple `cli` is provided to add challenges and to reset rank.
 
 Install python dependencies:
 
-    pip install sqlite hashlib flask argparse
+    sqlite3 hashlib flask argparse
 
 Create the database:
 
@@ -43,12 +43,15 @@ Link the client (if link is not already here):
 
 Run the server:
 
-    python server/main.py
+    cd server
+    python main.py
 
 Add a challenge:
 
-    python server/cli.py --insert --name bof2 --address "ssh -p2223 bof2@127.0.0.1" --description "Bof2 description" --flag ok`
+    cd server
+    python cli.py --insert --name bof2 --address "ssh -p2223 bof2@127.0.0.1" --description "Bof2 description" --flag ok`
 
 Reset rank:
 
-    python server/cli.py --reset
+    cd server
+    python cli.py --reset
