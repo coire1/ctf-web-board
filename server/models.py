@@ -99,11 +99,12 @@ def getRank():
     cur.execute("SELECT \
         id, \
         username, \
-        (SELECT COUNT(*) FROM points b WHERE a.username = b.username) AS agg_points, \
-        (SELECT COUNT(*) FROM points b WHERE a.username = b.username AND b.blood = 1) AS agg_blood \
-        FROM points a \
+        (COUNT(id) * ?) + (SUM(blood) * ?) AS agg_points, \
+        SUM(blood) AS agg_bloods \
+        FROM points \
         GROUP BY username \
-    ")
+        ORDER BY agg_points DESC \
+    ", (FLAG_POINTS, BLOOD_POINTS,))
     users = cur.fetchall()
     con.close()
     results = []
@@ -112,11 +113,11 @@ def getRank():
             {
                 'id': user[0],
                 'username': user[1],
-                'bloods': user[3],
-                'points': (user[3] * BLOOD_POINTS) + (user[2] * FLAG_POINTS)
+                'points': user[2],
+                'bloods': user[3]
             }
         )
-    return sorted(results, key=lambda k: k['points'], reverse=True)
+    return results
 
 
 def getChallengeRank(challenge_id):
@@ -125,12 +126,13 @@ def getChallengeRank(challenge_id):
     cur.execute("SELECT \
         id, \
         username, \
-        (SELECT COUNT(*) FROM points b WHERE a.username = b.username AND b.challenge_id = ?) AS agg_points, \
-        (SELECT COUNT(*) FROM points b WHERE a.username = b.username AND b.blood = 1 AND b.challenge_id = ?) AS agg_blood \
-        FROM points a \
-        WHERE a.challenge_id = ? \
+        (COUNT(id) * ?) + (SUM(blood) * ?) AS agg_points, \
+        SUM(blood) AS agg_bloods \
+        FROM points \
+        WHERE challenge_id = ? \
         GROUP BY username \
-    ", (int(challenge_id), int(challenge_id), int(challenge_id),))
+        ORDER BY agg_points DESC, created_at ASC \
+    ", (FLAG_POINTS, BLOOD_POINTS, int(challenge_id),))
     users = cur.fetchall()
     con.close()
     results = []
@@ -139,8 +141,8 @@ def getChallengeRank(challenge_id):
             {
                 'id': user[0],
                 'username': user[1],
-                'bloods': user[3],
-                'points': (user[3] * BLOOD_POINTS) + (user[2] * FLAG_POINTS)
+                'points': user[2],
+                'bloods': user[3]
             }
         )
-    return sorted(results, key=lambda k: k['points'], reverse=True)
+    return results
