@@ -1,6 +1,6 @@
 <template>
   <div class="challenge">
-    <ChallengeEl :challenge="challenge" />
+    <ChallengeEl :challenge="challenge" @updateRank="refreshRank()" />
     <Rank :users="users" />
   </div>
 </template>

@@ -9,7 +9,7 @@
       <div class="description">{{ challenge.description }}</div>
       <div class="address">{{ challenge.address }}</div>
       <div class="button" @click="showModal = true">Submit flag</div>
-      <check-challenge :challenge="challenge" v-if="showModal" @close="showModal = false" />
+      <check-challenge :challenge="challenge" v-if="showModal" @close="showModal = false" @updateRank="updateRank()" />
     </div>
   </div>
 </template>
@@ -29,6 +29,11 @@ export default {
     return {
       showModal: false
     };
+  },
+  methods: {
+    updateRank() {
+      this.$emit("updateRank");
+    }
   }
 };
 </script>
@@ -39,7 +44,8 @@ export default {
   width: 100%;
   float: left;
   margin-bottom: 80px;
-  a, a:visited {
+  a,
+  a:visited {
     color: #fff;
   }
   & > div:not(.modal-mask) {

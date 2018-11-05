@@ -66,6 +66,7 @@ export default {
     resetCheck() {
       this.result = false;
       this.$emit("close");
+      this.$emit("updateRank");
     }
   }
 };
