@@ -8,6 +8,8 @@
       </div>
       <div class="description">{{ challenge.description }}</div>
       <div class="address">{{ challenge.address }}</div>
+      <div class="base-points">Flag points: {{ challenge.base_points }}</div>
+      <div class="blood-points">Blood points: {{ challenge.blood_points }}</div>
       <div class="button" @click="showModal = true">Submit flag</div>
       <check-challenge :challenge="challenge" v-if="showModal" @close="showModal = false" @updateRank="updateRank()" />
     </div>
@@ -55,7 +57,7 @@ export default {
   }
   .name {
     font-size: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 30px !important;
     text-transform: uppercase;
   }
   .description {
@@ -69,12 +71,22 @@ export default {
     font-family: Monaco, courier, monospace;
     background: #424040;
   }
+  .blood-points {
+    margin-bottom: 30px !important;
+    color: red;
+  }
   .button {
-    width: auto;
-    text-decoration: underline;
+    width: auto !important;
+    // text-decoration: underline;
     text-transform: uppercase;
     font-size: 20px;
     cursor: pointer;
+    border: 5px solid white;
+    padding: 10px;
+    &:hover {
+      color: black;
+      background: white;
+    }
   }
 }
 </style>

@@ -48,7 +48,7 @@ h2 {
       padding-top: 20px;
     }
     .name {
-      text-transform: uppercase;
+      // text-transform: uppercase;
     }
     .bloods {
       color: red;

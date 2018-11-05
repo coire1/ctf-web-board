@@ -3,7 +3,7 @@
     <header class="header">
       <div class="logo-wrapper">
         <img src="./assets/logo.jpg" class="logo" />
-        <h1>MiniCTF by Haqlab</h1>
+        <h1>MiniCTF<br />Haqlab</h1>
       </div>
       <div id="nav">
         <router-link to="/">Rank</router-link>
@@ -44,6 +44,7 @@ header {
     }
     h1 {
       float: left;
+      width: calc(100% - 140px);
     }
   }
   #nav {
@@ -54,6 +55,9 @@ header {
     a:visited {
       padding: 20px;
       color: #fff;
+      &:hover {
+        color: #424040;
+      }
     }
   }
 }
@@ -65,6 +69,7 @@ header {
   max-width: 1440px;
   width: 100%;
   margin: 0px auto;
+  padding: 0 30px;
   font-family: "Press Start 2P", cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

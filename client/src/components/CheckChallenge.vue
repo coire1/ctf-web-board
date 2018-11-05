@@ -123,6 +123,10 @@ export default {
     border: none;
     padding: 10px;
     cursor: pointer;
+    &:hover {
+      background: #fff;
+      color: #000;
+    }
   }
 }
 

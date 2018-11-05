@@ -8,7 +8,7 @@ DATABASE_PATH = '../db/database.db'
 def getChallenges():
     con = sql.connect(DATABASE_PATH)
     cur = con.cursor()
-    cur.execute("SELECT id, name, address, description FROM challenges")
+    cur.execute("SELECT id, name, address, description, base_points, blood_points FROM challenges")
     challenges = cur.fetchall()
     con.close()
     results = []
@@ -18,7 +18,9 @@ def getChallenges():
                 'id': challenge[0],
                 'name': challenge[1],
                 'address': challenge[2],
-                'description': challenge[3]
+                'description': challenge[3],
+                'base_points': challenge[4],
+                'blood_points': challenge[5]
             }
         )
     return results
@@ -28,7 +30,7 @@ def getChallenge(challenge_id):
     con = sql.connect(DATABASE_PATH)
     cur = con.cursor()
     cur.execute(
-        "SELECT id, name, address, description FROM challenges WHERE id=?",
+        "SELECT id, name, address, description, base_points, blood_points FROM challenges WHERE id=?",
         (int(challenge_id),)
     )
     challenge = cur.fetchone()
@@ -37,7 +39,9 @@ def getChallenge(challenge_id):
         'id': challenge[0],
         'name': challenge[1],
         'address': challenge[2],
-        'description': challenge[3]
+        'description': challenge[3],
+        'base_points': challenge[4],
+        'blood_points': challenge[5]
     }
 
 
