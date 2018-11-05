@@ -22,9 +22,9 @@ Install npm dependencies:
     cd client
     npm install
 
-Config api host editing `client/.env`, the Vue enviroment file:
+Config api host editing `index.html`, even if the app is already built:
 
-    VUE_APP_API_BASE_URL="http://localhost:5000/"
+    <script>window.baseAPIUrl = 'http://localhost:5000'; </script>
 
 Build web app:
 
