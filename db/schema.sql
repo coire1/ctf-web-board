@@ -4,7 +4,9 @@ drop table if exists challenges;
     name text,
     address text,
     description text,
-    flag text
+    flag text,
+    base_points integer,
+    blood_points integer
 );
 
 
@@ -14,5 +16,7 @@ drop table if exists points;
     username text,
     challenge_id integer,
     created_at timestamp default current_timestamp,
+    base_points integer,
+    blood_points integer,
     blood boolean
 );

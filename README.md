@@ -17,11 +17,6 @@ Create the database:
 
     sqlite3 db/database.db < db/schema.sql
 
-In `server/models.py` some constants can be changed (optional):
-
-    FLAG_POINTS: points assigned for a captured flag
-    BLOOD_POINTS: points assigned for a captured blood
-
 Install npm dependencies:
 
     cd client
@@ -49,7 +44,7 @@ Run the server:
 Add a challenge:
 
     cd server
-    python cli.py --insert --name bof2 --address "ssh -p2223 bof2@127.0.0.1" --description "Bof2 description" --flag ok`
+    python cli.py --insert --name bof2 --address "ssh -p2223 bof2@127.0.0.1" --description "Bof2 description" --flag ok --base-points 10 --blood-points 30
 
 Reset rank:
 

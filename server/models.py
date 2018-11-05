@@ -4,9 +4,6 @@ import time
 
 
 DATABASE_PATH = '../db/database.db'
-FLAG_POINTS = 10
-BLOOD_POINTS = 30
-
 
 def getChallenges():
     con = sql.connect(DATABASE_PATH)
@@ -51,7 +48,7 @@ def checkChallenge(challenge_id, key, username):
     con = sql.connect(DATABASE_PATH)
     cur = con.cursor()
     cur.execute(
-        "SELECT id FROM challenges WHERE id=? AND flag=?",
+        "SELECT id, base_points, blood_points FROM challenges WHERE id=? AND flag=?",
         (
             int(challenge_id),
             hashlib.md5(key.encode('utf8')).hexdigest(),
@@ -75,11 +72,19 @@ def checkChallenge(challenge_id, key, username):
         )
         existingUser = cur.fetchall()
         if (len(existingUser) == 0):
+            blood_points = challenge[2] if blood else 0
             cur.execute(
                 "INSERT INTO \
-                points(username, challenge_id, created_at, blood) \
-                VALUES (?, ?, ?, ?)",
-                (str(username), int(challenge_id), time.time(), blood,)
+                points(username, challenge_id, created_at, base_points, blood_points, blood) \
+                VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    str(username),
+                    int(challenge_id),
+                    time.time(),
+                    int(challenge[1]),
+                    int(blood_points),
+                    blood
+                )
             )
             con.commit()
         else:
@@ -99,12 +104,12 @@ def getRank():
     cur.execute("SELECT \
         id, \
         username, \
-        (COUNT(id) * ?) + (SUM(blood) * ?) AS agg_points, \
+        (SUM(base_points) + SUM(blood_points)) AS agg_points, \
         SUM(blood) AS agg_bloods \
         FROM points \
         GROUP BY username \
-        ORDER BY agg_points DESC \
-    ", (FLAG_POINTS, BLOOD_POINTS,))
+        ORDER BY agg_points DESC, agg_bloods DESC \
+    ")
     users = cur.fetchall()
     con.close()
     results = []
@@ -126,13 +131,13 @@ def getChallengeRank(challenge_id):
     cur.execute("SELECT \
         id, \
         username, \
-        (COUNT(id) * ?) + (SUM(blood) * ?) AS agg_points, \
+        (SUM(base_points) + SUM(blood_points)) AS agg_points, \
         SUM(blood) AS agg_bloods \
         FROM points \
         WHERE challenge_id = ? \
         GROUP BY username \
         ORDER BY agg_points DESC, created_at ASC \
-    ", (FLAG_POINTS, BLOOD_POINTS, int(challenge_id),))
+    ", (int(challenge_id),))
     users = cur.fetchall()
     con.close()
     results = []
