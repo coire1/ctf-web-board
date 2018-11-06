@@ -14,7 +14,7 @@ def insertChallenge(name, address, description, flag, base_points, blood_points)
             str(name),
         )
     )
-    assert (cur.rowcount == 0), "challenge {} already exists".format(name)
+    assert (len(cur.fetchall()) == 0), "challenge {} already exists".format(name)
     cur.execute(
         "INSERT INTO challenges(name, address, description, flag, base_points, blood_points) \
          VALUES (?, ?, ?, ?, ?, ?)",
